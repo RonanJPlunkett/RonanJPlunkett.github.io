@@ -26,20 +26,53 @@
             <p> HelpHub is a company that works with people like you who want to volunteer. We connect you with local charities in your area.</p>
 
             <div class="picture-box">
-                <img src="https://via.placeholder.com/300x200" alt="Volunteer 1">
-                <p>Charity 1</p>
+                <img src="https://images.squarespace-cdn.com/content/v1/572a009bcf80a146d278c799/1605562013740-LAEE0JXI9FWZ5XMG8HZR/ShareCLTPic.jpg?format=1500w" alt="Volunteer 1">
+                <p>Holy Angels</p>
             </div>
 
-            <p>Volunteer 1 working with Charity 1.</p>
+            <p>Nurse playing with a Holy Angels child.</p>
 
             <div class="picture-box">
-                <img src="https://via.placeholder.com/300x200" alt="Volunteer 2">
-                <p>Charity 2</p>
+                <img src="https://images.contentstack.io/v3/assets/bltefdd0b53724fa2ce/blt1f0360a1ffe58eee/5dade82fdc674266df3d4fb6/Ronald_McDonald_Statue.jpeg" alt="Volunteer 2">
+                <p>Ronald McDonald House Charities</p>
             </div>
 
-            <p>Volunteer 2 working with Charity 2.</p>
+            <p>Volunteers working with the Ronald McDonald House Charities.</p>
         </main>
     </div>
+
+    <h2>Check Your Charity EIN:</h2>
+    <div id="output"></div>
+  
+    <script>
+      const ein = 'your_ein_here';
+      const apiKey = 'apikeyhere';
+      const url = `https://api.charityapi.org/api/public_charity_check/${ein}`;
+
+      function fetchCharityData() {
+        fetch(url, {
+          method: 'GET',
+          headers: {
+            'apikey': apiKey
+          }
+        })
+          .then(response => {
+            if (!response.ok) {
+              throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.json();
+          })
+          .then(data => {
+            document.getElementById('output').innerHTML = JSON.stringify(data, null, 2);
+          })
+          .catch(error => {
+            console.error('Error fetching data:', error);
+            document.getElementById('output').innerHTML = `Error fetching data: ${error.message}`;
+          });
+      }
+  
+      fetchCharityData();
+    </script>
 
     <footer></footer>
 </body>
